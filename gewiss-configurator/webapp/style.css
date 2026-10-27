@@ -107,7 +107,7 @@ h3 {
 /* Layout */
 .layout {
     display: grid;
-    grid-template-columns: minmax(280px, 360px) 1fr;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
     gap: calc(var(--spazio) * 1.5);
     padding-block: calc(var(--spazio) * 1.5);
     align-items: start;
@@ -119,6 +119,8 @@ h3 {
     border-radius: var(--raggio);
     box-shadow: var(--ombra);
     padding: calc(var(--spazio) * 1.25);
+    /* Gli elementi di griglia non si allargano oltre la colonna: l'overflow resta nella tabella. */
+    min-width: 0;
 }
 
 .pannello h2 {
@@ -275,6 +277,7 @@ h3 {
     font-size: 1.6rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
 }
 
 .card__nota {
@@ -369,11 +372,11 @@ h3 {
 
 @media (max-width: 767.98px) {
     .layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .griglia-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .intestazione__riga {
