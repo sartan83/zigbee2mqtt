@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Configuratore Gewiss — Preventivo impianto elettrico</title>
+        <link rel="stylesheet" href="style.css" />
+        <script type="module" src="app.js"></script>
+    </head>
+    <body>
+        <header class="intestazione">
+            <div class="contenitore intestazione__riga">
+                <div>
+                    <h1>Configuratore Gewiss</h1>
+                    <p class="sottotitolo">Dimensionamento magnetotermico, preventivo e lista materiali per impianti monofase</p>
+                </div>
+                <span id="stato-api" class="stato" data-stato="verifica" role="status" aria-live="polite">Verifica API…</span>
+            </div>
+        </header>
+
+        <main class="contenitore layout">
+            <section class="pannello" aria-labelledby="titolo-dati">
+                <h2 id="titolo-dati">Dati dell'impianto</h2>
+                <form id="form-calcolo" novalidate>
+                    <div class="campo">
+                        <label for="tipo_impianto">Tipo impianto</label>
+                        <select id="tipo_impianto" name="tipo_impianto">
+                            <option value="residenziale">Residenziale</option>
+                            <option value="commerciale">Commerciale</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="numero_interruttori_gewiss">Numero interruttori Gewiss</label>
+                        <input id="numero_interruttori_gewiss" name="numero_interruttori_gewiss" type="number" inputmode="numeric" min="0" step="1" value="10" required />
+                    </div>
+                    <div class="campo">
+                        <label for="potenza_totale_kw">Potenza totale installata <span class="unita">(kW)</span></label>
+                        <input id="potenza_totale_kw" name="potenza_totale_kw" type="number" inputmode="decimal" min="0" step="0.1" value="4.5" required />
+                    </div>
+                    <div class="campo">
+                        <label for="numero_punti_luce">Numero punti luce</label>
+                        <input id="numero_punti_luce" name="numero_punti_luce" type="number" inputmode="numeric" min="0" step="1" value="12" required />
+                    </div>
+                    <div class="campo">
+                        <label for="superficie_mq">Superficie <span class="unita">(m²)</span></label>
+                        <input id="superficie_mq" name="superficie_mq" type="number" inputmode="decimal" min="0" step="1" value="85" required />
+                    </div>
+                    <div class="campo campo--check">
+                        <input id="modalita_demo" name="modalita_demo" type="checkbox" checked />
+                        <label for="modalita_demo">Usa la modalità demo se l'API non è raggiungibile</label>
+                    </div>
+                </form>
+                <p class="nota">Il calcolo si aggiorna automaticamente mentre modifichi i dati.</p>
+            </section>
+
+            <section class="pannello risultati" aria-labelledby="titolo-risultati" aria-live="polite">
+                <div class="risultati__testata">
+                    <h2 id="titolo-risultati">Risultato</h2>
+                    <span id="caricamento" class="caricamento" hidden>Calcolo in corso…</span>
+                </div>
+
+                <div id="avviso-demo" class="avviso avviso--demo" role="status" hidden>
+                    Modalità demo: API non raggiungibile, valori calcolati localmente con il listino di default (indicativi).
+                </div>
+                <div id="errore" class="avviso avviso--errore" role="alert" hidden></div>
+
+                <div class="griglia-card">
+                    <article class="card">
+                        <h3>Corrente totale</h3>
+                        <p class="card__valore" id="r-corrente">—</p>
+                        <p class="card__nota" id="r-corrente-contemporanea"></p>
+                    </article>
+                    <article class="card card--evidenza">
+                        <h3>Magnetotermico consigliato</h3>
+                        <p class="card__valore" id="r-magnetotermico">—</p>
+                        <p class="card__nota">Taglia standard superiore</p>
+                    </article>
+                    <article class="card">
+                        <h3>Costo materiali</h3>
+                        <p class="card__valore" id="r-materiali">—</p>
+                    </article>
+                    <article class="card">
+                        <h3>Costo manodopera</h3>
+                        <p class="card__valore" id="r-manodopera">—</p>
+                        <p class="card__nota">Punti luce + quota fissa</p>
+                    </article>
+                    <article class="card">
+                        <h3 id="t-iva">IVA</h3>
+                        <p class="card__valore" id="r-iva">—</p>
+                        <p class="card__nota" id="r-imponibile"></p>
+                    </article>
+                    <article class="card card--totale">
+                        <h3>Totale</h3>
+                        <p class="card__valore" id="r-totale">—</p>
+                        <p class="card__nota">IVA inclusa</p>
+                    </article>
+                </div>
+
+                <h3 class="titolo-tabella">Lista materiali</h3>
+                <div class="tabella-scorrevole">
+                    <table class="tabella">
+                        <thead>
+                            <tr>
+                                <th scope="col">Codice</th>
+                                <th scope="col">Descrizione</th>
+                                <th scope="col" class="num">Quantità</th>
+                                <th scope="col" class="num">Prezzo unitario</th>
+                                <th scope="col" class="num">Importo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="r-tabella">
+                            <tr><td colspan="5" class="vuoto">Nessun calcolo disponibile.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="nota" id="r-listino"></p>
+            </section>
+        </main>
+    </body>
+</html>

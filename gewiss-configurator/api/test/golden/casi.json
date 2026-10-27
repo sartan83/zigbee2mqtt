@@ -1,0 +1,276 @@
+{
+    "_descrizione": "Casi di riferimento input → output atteso. 'origine' indica la provenienza dei valori attesi: 'default' = motore di default di questo servizio, 'legacy' = output del vecchio configuratore. Per verificare l'assenza di regressioni aggiungere/sostituire i casi con gli output del software legacy (vedi README).",
+    "tolleranza_importi": 0.005,
+    "tolleranza_correnti": 0.005,
+    "casi": [
+        {
+            "id": "residenziale-4_5kw",
+            "descrizione": "Caso di riferimento: 4,5 kW → 19,57 A → magnetotermico 20 A",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 10,
+                "potenza_totale_kw": 4.5,
+                "numero_punti_luce": 12,
+                "superficie_mq": 85,
+                "tipo_impianto": "residenziale"
+            },
+            "atteso": {
+                "corrente_totale_a": 19.57,
+                "magnetotermico_a": 20,
+                "costo_materiali": 125,
+                "costo_manodopera": 570,
+                "iva": 152.9,
+                "totale": 847.9,
+                "materiali": [
+                    {
+                        "codice": "GW-CHORUS-INT-1P16",
+                        "quantita": 10
+                    },
+                    {
+                        "codice": "GW-MTC-1PN-C20",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-CAVO-FS17-25",
+                        "quantita": 552
+                    },
+                    {
+                        "codice": "GW-DLP-CAN-40X17",
+                        "quantita": 68
+                    }
+                ]
+            }
+        },
+        {
+            "id": "residenziale-vuoto",
+            "descrizione": "Impianto a zero: solo quota fissa, taglia minima 6 A",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 0,
+                "potenza_totale_kw": 0,
+                "numero_punti_luce": 0,
+                "superficie_mq": 0,
+                "tipo_impianto": "residenziale"
+            },
+            "atteso": {
+                "corrente_totale_a": 0,
+                "magnetotermico_a": 6,
+                "costo_materiali": 0,
+                "costo_manodopera": 150,
+                "iva": 33,
+                "totale": 183,
+                "materiali": [
+                    {
+                        "codice": "GW-MTC-1PN-C6",
+                        "quantita": 1
+                    }
+                ]
+            }
+        },
+        {
+            "id": "residenziale-3kw",
+            "descrizione": "Contratto tipico 3 kW → 13,04 A → 16 A",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 8,
+                "potenza_totale_kw": 3,
+                "numero_punti_luce": 10,
+                "superficie_mq": 70,
+                "tipo_impianto": "residenziale"
+            },
+            "atteso": {
+                "corrente_totale_a": 13.04,
+                "magnetotermico_a": 16,
+                "costo_materiali": 100,
+                "costo_manodopera": 500,
+                "iva": 132,
+                "totale": 732,
+                "materiali": [
+                    {
+                        "codice": "GW-CHORUS-INT-1P16",
+                        "quantita": 8
+                    },
+                    {
+                        "codice": "GW-MTC-1PN-C16",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-CAVO-FS17-15",
+                        "quantita": 456
+                    },
+                    {
+                        "codice": "GW-DLP-CAN-40X17",
+                        "quantita": 56
+                    }
+                ]
+            }
+        },
+        {
+            "id": "commerciale-16a-esatti",
+            "descrizione": "Corrente esattamente pari a una taglia: 3,68 kW → 16,00 A → 16 A",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 4,
+                "potenza_totale_kw": 3.68,
+                "numero_punti_luce": 6,
+                "superficie_mq": 40,
+                "tipo_impianto": "commerciale"
+            },
+            "atteso": {
+                "corrente_totale_a": 16,
+                "magnetotermico_a": 16,
+                "costo_materiali": 75.6,
+                "costo_manodopera": 588,
+                "iva": 145.99,
+                "totale": 809.59,
+                "materiali": [
+                    {
+                        "codice": "GW-SYSTEM-INT-1P16",
+                        "quantita": 4
+                    },
+                    {
+                        "codice": "GW-MTC-1PN-C16",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-CAVO-FS17-15",
+                        "quantita": 330
+                    },
+                    {
+                        "codice": "GW-DLP-CAN-80X20",
+                        "quantita": 40
+                    }
+                ]
+            }
+        },
+        {
+            "id": "commerciale-arrotondamento-iva",
+            "descrizione": "IVA con arrotondamento al centesimo: 318,90 € × 22% = 70,158 → 70,16 €",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 1,
+                "potenza_totale_kw": 2,
+                "numero_punti_luce": 0,
+                "superficie_mq": 12.5,
+                "tipo_impianto": "commerciale"
+            },
+            "atteso": {
+                "corrente_totale_a": 8.7,
+                "magnetotermico_a": 10,
+                "costo_materiali": 18.9,
+                "costo_manodopera": 300,
+                "iva": 70.16,
+                "totale": 389.06,
+                "materiali": [
+                    {
+                        "codice": "GW-SYSTEM-INT-1P16",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-MTC-1PN-C10",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-CAVO-FS17-15",
+                        "quantita": 15
+                    },
+                    {
+                        "codice": "GW-DLP-CAN-80X20",
+                        "quantita": 13
+                    }
+                ]
+            }
+        },
+        {
+            "id": "commerciale-negozio",
+            "descrizione": "Negozio: 12 kW → 52,17 A → 63 A",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 120,
+                "potenza_totale_kw": 12,
+                "numero_punti_luce": 200,
+                "superficie_mq": 1500,
+                "tipo_impianto": "commerciale"
+            },
+            "atteso": {
+                "corrente_totale_a": 52.17,
+                "magnetotermico_a": 63,
+                "costo_materiali": 2268,
+                "costo_manodopera": 9900,
+                "iva": 2676.96,
+                "totale": 14844.96,
+                "materiali": [
+                    {
+                        "codice": "GW-SYSTEM-INT-1P16",
+                        "quantita": 120
+                    },
+                    {
+                        "codice": "GW-MTC-1PN-C63",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-CAVO-FS17-16",
+                        "quantita": 10800
+                    },
+                    {
+                        "codice": "GW-DLP-CAN-80X20",
+                        "quantita": 1500
+                    }
+                ]
+            }
+        },
+        {
+            "id": "commerciale-taglia-massima",
+            "descrizione": "Limite superiore monofase: 14,49 kW → 63,00 A → 63 A",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 1000,
+                "potenza_totale_kw": 14.49,
+                "numero_punti_luce": 5000,
+                "superficie_mq": 100000,
+                "tipo_impianto": "commerciale"
+            },
+            "atteso": {
+                "corrente_totale_a": 63,
+                "magnetotermico_a": 63,
+                "costo_materiali": 18900,
+                "costo_manodopera": 240300,
+                "iva": 57024,
+                "totale": 316224,
+                "materiali": [
+                    {
+                        "codice": "GW-SYSTEM-INT-1P16",
+                        "quantita": 1000
+                    },
+                    {
+                        "codice": "GW-MTC-1PN-C63",
+                        "quantita": 1
+                    },
+                    {
+                        "codice": "GW-CAVO-FS17-16",
+                        "quantita": 240000
+                    },
+                    {
+                        "codice": "GW-DLP-CAN-80X20",
+                        "quantita": 100000
+                    }
+                ]
+            }
+        },
+        {
+            "id": "residenziale-fuori-taglia",
+            "descrizione": "Oltre 63 A (14,5 kW → 63,04 A): calcolo non eseguibile in monofase",
+            "origine": "default",
+            "input": {
+                "numero_interruttori_gewiss": 20,
+                "potenza_totale_kw": 14.5,
+                "numero_punti_luce": 30,
+                "superficie_mq": 200,
+                "tipo_impianto": "residenziale"
+            },
+            "atteso_errore": {
+                "codice": "FUORI_TAGLIA"
+            }
+        }
+    ]
+}

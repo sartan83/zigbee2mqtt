@@ -1,0 +1,399 @@
+/* Configuratore Gewiss — stile della SPA. */
+
+:root {
+    --colore-primario: #0057a8;
+    --colore-primario-scuro: #003f7a;
+    --colore-accento: #e30613;
+    --colore-sfondo: #f3f5f8;
+    --colore-superficie: #ffffff;
+    --colore-testo: #1b2430;
+    --colore-testo-tenue: #5b6878;
+    --colore-bordo: #d7dde5;
+    --colore-ok: #1f7a3a;
+    --colore-errore: #b3261e;
+    --colore-demo: #8a5a00;
+    --colore-focus: #ffbf47;
+    --raggio: 10px;
+    --spazio: 1rem;
+    --ombra: 0 1px 3px rgb(16 24 40 / 8%), 0 1px 2px rgb(16 24 40 / 6%);
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--colore-testo);
+    background: var(--colore-sfondo);
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    line-height: 1.25;
+}
+
+.contenitore {
+    width: min(1200px, 100% - 2 * var(--spazio));
+    margin-inline: auto;
+}
+
+/* Intestazione */
+.intestazione {
+    background: var(--colore-primario);
+    color: #fff;
+    padding-block: calc(var(--spazio) * 1.25);
+    border-bottom: 4px solid var(--colore-accento);
+}
+
+.intestazione__riga {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spazio);
+}
+
+.intestazione h1 {
+    font-size: 1.5rem;
+}
+
+.sottotitolo {
+    margin: 0.25rem 0 0;
+    opacity: 0.9;
+}
+
+.stato {
+    flex-shrink: 0;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgb(255 255 255 / 18%);
+}
+
+.stato::before {
+    content: "";
+    display: inline-block;
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.stato[data-stato="online"] {
+    background: #e6f4ea;
+    color: var(--colore-ok);
+}
+
+.stato[data-stato="offline"] {
+    background: #fde7e5;
+    color: var(--colore-errore);
+}
+
+.stato[data-stato="demo"] {
+    background: #fff4d6;
+    color: var(--colore-demo);
+}
+
+/* Layout */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: calc(var(--spazio) * 1.5);
+    padding-block: calc(var(--spazio) * 1.5);
+    align-items: start;
+}
+
+.pannello {
+    background: var(--colore-superficie);
+    border: 1px solid var(--colore-bordo);
+    border-radius: var(--raggio);
+    box-shadow: var(--ombra);
+    padding: calc(var(--spazio) * 1.25);
+}
+
+.pannello h2 {
+    font-size: 1.15rem;
+    margin-bottom: var(--spazio);
+}
+
+/* Form */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: var(--spazio);
+}
+
+.campo label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.unita {
+    font-weight: 400;
+    color: var(--colore-testo-tenue);
+}
+
+.campo input,
+.campo select {
+    font: inherit;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--colore-bordo);
+    border-radius: 8px;
+    background: #fff;
+    color: inherit;
+    min-height: 44px;
+}
+
+.campo input[aria-invalid="true"],
+.campo select[aria-invalid="true"] {
+    border-color: var(--colore-errore);
+    box-shadow: 0 0 0 1px var(--colore-errore);
+}
+
+.campo--check {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.campo--check label {
+    font-weight: 400;
+}
+
+.campo--check input {
+    width: 1.15rem;
+    height: 1.15rem;
+    min-height: 0;
+    accent-color: var(--colore-primario);
+}
+
+/* Focus accessibile e ben visibile su tutti gli elementi interattivi. */
+:focus-visible {
+    outline: 3px solid var(--colore-focus);
+    outline-offset: 2px;
+}
+
+.campo input:focus-visible,
+.campo select:focus-visible {
+    outline: 3px solid var(--colore-focus);
+    outline-offset: 1px;
+    border-color: var(--colore-primario);
+}
+
+.nota {
+    margin: 0.5rem 0 0;
+    color: var(--colore-testo-tenue);
+    font-size: 0.875rem;
+}
+
+/* Risultati */
+.risultati__testata {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--spazio);
+}
+
+.caricamento {
+    color: var(--colore-primario);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.caricamento::before {
+    content: "";
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-right: 0.4rem;
+    vertical-align: -0.1rem;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: rotazione 0.7s linear infinite;
+}
+
+@keyframes rotazione {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.avviso {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: var(--spazio);
+    font-size: 0.95rem;
+}
+
+.avviso--errore {
+    background: #fde7e5;
+    color: var(--colore-errore);
+    border: 1px solid #f4b9b3;
+}
+
+.avviso--demo {
+    background: #fff4d6;
+    color: var(--colore-demo);
+    border: 1px solid #f1d58a;
+}
+
+.griglia-card {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spazio);
+}
+
+.card {
+    border: 1px solid var(--colore-bordo);
+    border-radius: var(--raggio);
+    padding: var(--spazio);
+    background: #fafbfc;
+}
+
+.card h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--colore-testo-tenue);
+}
+
+.card__valore {
+    margin: 0.35rem 0 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.card__nota {
+    margin: 0.2rem 0 0;
+    font-size: 0.8rem;
+    color: var(--colore-testo-tenue);
+}
+
+.card--evidenza {
+    border-color: var(--colore-primario);
+    background: #eef5fc;
+}
+
+.card--evidenza .card__valore {
+    color: var(--colore-primario-scuro);
+}
+
+.card--totale {
+    background: var(--colore-primario);
+    border-color: var(--colore-primario);
+    color: #fff;
+}
+
+.card--totale h3,
+.card--totale .card__nota {
+    color: rgb(255 255 255 / 85%);
+}
+
+/* Tabella materiali */
+.titolo-tabella {
+    font-size: 1rem;
+    margin: calc(var(--spazio) * 1.5) 0 0.5rem;
+}
+
+.tabella-scorrevole {
+    overflow-x: auto;
+    border: 1px solid var(--colore-bordo);
+    border-radius: var(--raggio);
+}
+
+.tabella {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+}
+
+.tabella th,
+.tabella td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--colore-bordo);
+}
+
+.tabella thead th {
+    background: #f0f3f7;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tabella tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.tabella .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.tabella .codice {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.tabella .compreso {
+    color: var(--colore-testo-tenue);
+    font-style: italic;
+}
+
+.tabella .vuoto {
+    text-align: center;
+    color: var(--colore-testo-tenue);
+}
+
+/* Responsive: griglia → colonna singola sotto 768px. */
+@media (max-width: 1024px) {
+    .griglia-card {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .griglia-card {
+        grid-template-columns: 1fr;
+    }
+
+    .intestazione__riga {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card__valore {
+        font-size: 1.4rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .caricamento::before {
+        animation: none;
+    }
+}
+
+/* Stato di caricamento dei risultati (in coda per non violare l'ordine di specificità). */
+.risultati[aria-busy="true"] .griglia-card {
+    opacity: 0.6;
+    transition: opacity 0.15s;
+}
