@@ -1,0 +1,26 @@
+{
+    "name": "gewiss-configurator-api",
+    "version": "1.0.0",
+    "private": true,
+    "description": "API REST del configuratore Gewiss: dimensionamento magnetotermico, preventivo e lista materiali per impianti elettrici monofase",
+    "type": "module",
+    "main": "server.js",
+    "engines": {
+        "node": ">=20"
+    },
+    "scripts": {
+        "start": "node server.js",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^5.1.0",
+        "express-rate-limit": "^8.0.1",
+        "helmet": "^8.1.0"
+    },
+    "devDependencies": {
+        "supertest": "^7.1.4",
+        "vitest": "~4.0.18"
+    }
+}
